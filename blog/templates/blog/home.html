@@ -6,7 +6,7 @@
               <div class="col-sm-2"><img src="{{ post.author.profile.image.url }}" class="blog-image" width="60" height="60"></div>
               <div class="col">
                   <div class="article-metadata ">
-                       <a class="mr-2" href="{% url 'post-detail' post.id%}">{{ post.author }}</a>
+                       <a class="mr-2" href="{% url 'user-posts' post.author.username%}">{{ post.author }}</a>
                         <small class="text-muted">{{ post.date|date:"F d, Y" }}</small>
                   </div>
                   <h2><a class="article-title" href="{% url 'post-detail' post.id%}">{{ post.title }}</a></h2>
