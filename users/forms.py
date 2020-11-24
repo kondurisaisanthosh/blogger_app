@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from users.models import Profile
 
 
+
 class UserRegistrationForm(UserCreationForm):
     email=forms.EmailField()
 
@@ -24,3 +25,4 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
+

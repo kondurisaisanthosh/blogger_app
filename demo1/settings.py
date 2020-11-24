@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -131,10 +132,24 @@ CRISPY_TEMPLATE_PACK='bootstrap4'
 LOGIN_URL= 'login'
 
 LOGIN_REDIRECT_URL='blog-home'
-
+# Email
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
 EMAIL_HOST_USER='konduri.santhosh96@gmail.com'
 EMAIL_HOST_PASSWORD='saisantosh1'
+
+# AWS
+AWS_ACCESS_KEY_ID='AKIAZQDZOKYWIFD5DKAM'
+AWS_SECRET_ACCESS_KEY='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'
+DEFAULT_FILE_STORAGE='storages.backends.s3boto3.S3Boto3Storage'
+AWS_STORAGE_BUCKET_NAME='demo1-django-profilepics'
+AWS_S3_REGION_NAME = 'us-east-2'
+AWS_DEFAULT_ACL = 'public-read'
+
+AWS_S3_FILE_OVERWRITE=False
+AWS_DEFAULT_ACL=None
+
+
+
