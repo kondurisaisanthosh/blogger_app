@@ -1,12 +1,9 @@
-import math
-from PIL import Image, ImageOps
-from django.core.files.base import ContentFile
-from django.core.files.storage import default_storage as storage
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import sys
+from PIL import Image
 from django.db import models
-from sorl.thumbnail import get_thumbnail
 from django.contrib.auth.models import User
-from storages.backends.s3boto3 import S3Boto3Storage
-from django_resized import ResizedImageField
 
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
@@ -22,3 +19,15 @@ class Profile(models.Model):
     #         output=(300,300)
     #         img.thumbnail(output)
     #         img.save(self.image.path)
+
+    def save(self):
+        im = Image.open(self.image)
+        if im.mode !='RGB':
+            im = im.convert("RGB")
+        output = BytesIO()
+        im = im.resize((300, 300))
+        im.save(output, format='JPEG', quality=100)
+        output.seek(0)
+        self.image = InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % self.image.name.split('.')[0], 'image/jpeg',
+                                          sys.getsizeof(output), None)
+        super(Profile, self).save()
