@@ -20,7 +20,7 @@ class Profile(models.Model):
     #         img.thumbnail(output)
     #         img.save(self.image.path)
 
-    def save(self):
+    def save(self,*args, **kwargs):
         im = Image.open(self.image)
         if im.mode !='RGB':
             im = im.convert("RGB")
